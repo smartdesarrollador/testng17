@@ -5,13 +5,26 @@ import { TercerProcesoComponent } from './paginas/admin/contratacion/contrato/te
 import { PageNotFoundComponent } from './paginas/page-not-found/page-not-found.component';
 import { DashboardComponent } from './paginas/admin/dashboard/dashboard.component';
 import { ContratoComponent } from './paginas/admin/contratacion/contrato/contrato.component';
+import { AdminComponent } from './paginas/admin/admin.component';
+import { LoginComponent } from './paginas/auth/login/login.component';
+import { RegisterComponent } from './paginas/auth/register/register.component';
 
 export const routes: Routes = [
-  { path: 'dashboard', title: 'Dashboard', component: DashboardComponent },
   {
-    path: 'contrato',
-    /* component: ContratoComponent, */
+    path: 'auth',
     children: [
+      { path: 'login', component: LoginComponent },
+      {
+        path: 'register',
+        component: RegisterComponent,
+      },
+    ],
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      { path: 'dashboard', title: 'Dashboard', component: DashboardComponent },
       {
         path: 'proceso-1',
         component: PrimerProcesoComponent,
@@ -26,6 +39,6 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/admin/dashboard', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
